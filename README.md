@@ -22,6 +22,9 @@ and even better... you frontrun the original Tx :)
 4/ Run the bot
 and... that's it !
 
+https://user-images.githubusercontent.com/70858574/186656960-d5b8152a-26d4-46e0-9f37-2d9deb12ffb4.mp4
+
+
 &nbsp;
 
 # Things you need to know

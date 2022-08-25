@@ -34,6 +34,13 @@ Don't worry, all the usual ways are implemented, but when you find a wallet that
 
 &nbsp;
 
+# How can I buy it?
+Contact @TsarBuig on Telegram
+
+![image](https://user-images.githubusercontent.com/70858574/186655675-dc18f57a-868b-4eab-9460-22efa9feccc9.png)
+
+&nbsp;
+
 # Bot configuration
 
 #### BUY/SELL amounts

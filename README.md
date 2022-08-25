@@ -35,21 +35,38 @@ Don't worry, all the usual ways are implemented, but when you find a wallet that
 &nbsp;
 
 # Bot configuration
-## Secret parameters
-Open Secret_parameters.json file in the root directory of the bot. 
 
-```
-{
-  "CUSTOM_NODE_WSS": "enter here your node ws address",
-  "YOUR_WALLET_ADDRESS": "",
-  "PRIVATE_KEY": "",
-  "WALLETHUNTER_TOKEN_WALLET_ADDRESS": "",
-  "WALLETHUNTER_TOKEN_WALLET_PRIVATE_KEY": ""
-}
+#### BUY/SELL amounts
+```yaml
+BUY_AMOUNT: "10%", // you can use percentage here. Example : with "50%"", if tracked wallet buys 1 BNB, you will buy 0.5 BNB
+SELL_AMOUNT: "100%", // if you copy a SELL Tx, it will sell  xx%  of the amount of those tokens that you hold in your wallet. You can also enter "same_as_tx" to use same value than the wallet you hunt
 ```
 
-- YOUR_WALLET_ADDRESS - public address of your account (wallet); this address is used to buy tokens
-- PRIVATE_KEY - private key of your account (wallet); key is used to sign and send buy transaction : never share this key with anyone!!!
-- WALLETHUNTER_TOKEN_WALLET_ADDRESS - this bot works if you hold some special tokens --> enter here the wallet where you hold them
-- WALLETHUNTER_TOKEN_WALLET_PRIVATE_KEY - private key of the wallet where you hold WalletHunter tokens
+#### Wallets that you want to hunt
+```yaml
+TRACKED_WALLET : ["0x57825dd07df69d2d3bc800356133562770e7f0a1", "0x842550340af19d6e1af4cc1083a25e9c83c26f05"],
+```
 
+#### BUY protections
+```yaml
+TOKENS_BLACKLIST : ["0x702de1f526ac996bcfdb6512bafbe04bf619fad6", "0xe9e7cea3dedca5984780bafc599bd69add087d56", "0x55d398326f99059ff775485246999027b3197955", "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d"], // Tokens you don't want to buy. It's a list : you can enter several tokens that you don't want to trade
+BUYAFTER_XXX_SECONDS : 0, 
+HONEYPOT_CHECK : false, 
+BUY_SEVERAL_TIME_SAME_TOKEN : true, // If "false", bot not buy anymore the token if you've already bought it before
+MINIMUM_BUY_AMOUNT_IN_BASE: 0.0000001, // bot won't buy if your Tx value is INFERIOR to this value (in ETH, BNB...)
+MAXIMUM_BUY_AMOUNT_IN_BASE: 10, // bot won't buy if your Tx value is SUPERIOR to this value (in ETH, BNB...)
+```
+
+#### GAS  
+```yaml
+Tx_GAS : 120% // you can use percentage here. Example : with "120%"", if tracked wallet uses GAS = 10, you will use GAS = 12
+GAS_BOOST : 10 // if you use txGas = BOOST
+GAS_LIMIT : 1000000
+GASPRIORITY_FOR_ETH_ONLY : 2 // for EIP1559 Tx
+```
+
+#### When stop the bot
+```yaml
+AMOUNT_OF_TX_BEFORE_THE_BOT_STOP : 2, // bot will stop automatically after this amount of BUY Tx made in a row
+STOP_IF_BALANCE_IS_LOWER_THAN : 0.02, // bot will stop automatically if balance goes under this amount (to avoid being scammed by honeypot)
+```

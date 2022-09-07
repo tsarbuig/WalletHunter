@@ -63,6 +63,7 @@ TOKENS_BLACKLIST : ["0x702de1f526ac996bcfdb6512bafbe04bf619fad6", "0xe9e7cea3ded
 BUYAFTER_XXX_SECONDS : 0, 
 HONEYPOT_CHECK : false, 
 BUY_SEVERAL_TIME_SAME_TOKEN : true, // If "false", bot not buy anymore the token if you've already bought it before
+ONLY_1_BUY_PER_BLOCK : true, // If "true", bot won't make more than 1 Tx per block. Set it to "false" if you want to track super-fast wallets with more than 1 Tx per block 
 MINIMUM_BUY_AMOUNT_IN_BASE: 0.0000001, // bot won't buy if your Tx value is INFERIOR to this value (in ETH, BNB...)
 MAXIMUM_BUY_AMOUNT_IN_BASE: 10, // bot won't buy if your Tx value is SUPERIOR to this value (in ETH, BNB...)
 ```
@@ -77,6 +78,6 @@ GASPRIORITY_FOR_ETH_ONLY : 2 // for EIP1559 Tx
 
 #### When stop the bot
 ```yaml
-AMOUNT_OF_TX_BEFORE_THE_BOT_STOP : 2, // bot will stop automatically after this amount of BUY Tx made in a row
+AMOUNT_OF_BUY_TX_BEFORE_THE_BOT_STOP : 2, // bot will stop automatically after this amount of BUY Tx made in a row
 STOP_IF_BALANCE_IS_LOWER_THAN : 0.02, // bot will stop automatically if balance goes under this amount (to avoid being scammed by honeypot)
 ```

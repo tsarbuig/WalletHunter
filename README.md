@@ -37,6 +37,17 @@ Don't worry, all the usual ways are implemented, but when you find a wallet that
 
 &nbsp;
 
+# Who am I?
+I’m the lead dev of LimitSwap, one of the first Crypto Trading bot launched on the market.
+(even though this bot was originally created by @CryptoGnome, my Coding Master :) )
+
+LimitSwap is still my #1 project with more than 500 users, along with Sniper Bot, also one of the first Sniping Bot available.
+
+Feel free to join our community:  https://t.me/LimitSwap 
+
+
+&nbsp;
+
 # How can I buy it?
 Contact @TsarBuig on Telegram
 

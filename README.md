@@ -92,3 +92,9 @@ GASPRIORITY_FOR_ETH_ONLY : 2 // for EIP1559 Tx
 AMOUNT_OF_BUY_TX_BEFORE_THE_BOT_STOP : 2, // bot will stop automatically after this amount of BUY Tx made in a row
 STOP_IF_BALANCE_IS_LOWER_THAN : 0.02, // bot will stop automatically if balance goes under this amount (to avoid being scammed by honeypot)
 ```
+
+#### Antirug
+```yaml
+LIQUIDITY_REMOVAL_PERCENTAGE : 0.0001, // Force sell all your tokens is liquidity removal > LIQUIDITY_REMOVAL_PERCENTAGE
+GAS_MULTIPLIER : 2.0, // in case of force sell after detecting a rug, multiply original Tx Gas by GAS_MULTIPLIER
+```

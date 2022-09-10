@@ -95,6 +95,7 @@ STOP_IF_BALANCE_IS_LOWER_THAN : 0.02, // bot will stop automatically if balance 
 
 #### Antirug
 ```yaml
+ACTIVATE_ANTIRUG : true, // use it if the wallet you track does not have its own antirug protection
 LIQUIDITY_REMOVAL_PERCENTAGE : 0.0001, // Force sell all your tokens is liquidity removal > LIQUIDITY_REMOVAL_PERCENTAGE
 GAS_MULTIPLIER : 2.0, // in case of force sell after detecting a rug, multiply original Tx Gas by GAS_MULTIPLIER
 ```

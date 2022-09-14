@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/70858574/186650034-07175829-a345-4920-b517-bfe7c7a72cb3.png)
+![image](https://user-images.githubusercontent.com/70858574/190273360-85035735-dd90-45a7-bb9a-d48a9c7064ed.png)
 
 WalletHunter is the only copytrading bot available on the market. Find profitables wallets, and...
 - they buy  --> you buy 
@@ -13,7 +13,7 @@ and even better... you frontrun the original Tx :)
 
 2/ Enter them into the bot
 
-3/ Define your parameters :
+3/ Define your strategy :
 - Amount (same amount / fraction of original amount...)
 - GAS
 - HoneyPot check before buy

@@ -99,3 +99,15 @@ ACTIVATE_ANTIRUG : true, // use it if the wallet you track does not have its own
 LIQUIDITY_REMOVAL_PERCENTAGE : 0.0001, // Force sell all your tokens is liquidity removal > LIQUIDITY_REMOVAL_PERCENTAGE
 GAS_MULTIPLIER : 2.0, // in case of force sell after detecting a rug, multiply original Tx Gas by GAS_MULTIPLIER
 ```
+
+# Dedicated modes
+
+#### FORCESELL mode
+```yaml
+./WalletHunter --forcesell  : use this mode if you want to sell all your tokens in 1 click
+```
+
+#### ANTIRUG mode
+```yaml
+./WalletHunter --antirug  : use this mode if you want to start antirug mode on a token you already hold
+```

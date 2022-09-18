@@ -59,6 +59,7 @@ Contact @TsarBuig on Telegram
 
 #### BUY/SELL amounts
 ```yaml
+WALLETHUNTER_MODE: "buy_only", // Available values : buy_and_sell / buy_only
 BUY_AMOUNT: "10%", // you can use percentage here. Example : with "50%"", if tracked wallet buys 1 BNB, you will buy 0.5 BNB
 SELL_AMOUNT: "100%", // if you copy a SELL Tx, it will sell  xx%  of the amount of those tokens that you hold in your wallet. You can also enter "same_as_tx" to use same value than the wallet you hunt
 ```

@@ -1,6 +1,8 @@
 ![image](https://user-images.githubusercontent.com/70858574/190273360-85035735-dd90-45a7-bb9a-d48a9c7064ed.png)
 
-Visit my website : https://wallethunter.app/
+ℹ️ Visit my website : https://wallethunter.app/
+
+📖 Check all new features in [Releases page](https://github.com/tsarbuig/WalletHunter/releases)
 
 &nbsp;
 
@@ -63,9 +65,16 @@ Contact @TsarBuig on Telegram
 
 #### BUY/SELL amounts
 ```yaml
-WALLETHUNTER_MODE: "buy_only", // Available values : buy_and_sell / buy_only
+WALLETHUNTER_MODE: "buy_and_autosell", 
+// Available values : 
+- buy_and_sell --> will copy all buy/sell Tx from wallet
+- buy_and_autosell --> will copy buy Tx but will sell automatically after xx% of profit. Target is defined by AUTOSELL_PROFIT parameter
+- buy_only --> will only copy buys
+
 BUY_AMOUNT: "10%", // you can use percentage here. Example : with "50%"", if tracked wallet buys 1 BNB, you will buy 0.5 BNB
 SELL_AMOUNT: "100%", // if you copy a SELL Tx, it will sell  xx%  of the amount of those tokens that you hold in your wallet. You can also enter "same_as_tx" to use same value than the wallet you hunt
+AUTOSELL_PROFIT: "200%", // if you use 'buy_and_autosell' mode, bot will automatically sell token when price has reached buyprice * AUTOSELL_PROFIT
+
 ```
 
 #### Wallets that you want to hunt

@@ -121,6 +121,11 @@ GAS_MULTIPLIER : 2.0, // in case of force sell after detecting a rug, multiply o
 ./WalletHunter --forcesell  : use this mode if you want to sell all your tokens in 1 click
 ```
 
+#### AUTOSELL mode
+```yaml
+./WalletHunter --forcesell  : use this mode if you want he bot to sell all your tokens after a xx% profit 
+```
+
 #### ANTIRUG mode
 ```yaml
 ./WalletHunter --antirug  : use this mode if you want to start antirug mode on a token you already hold

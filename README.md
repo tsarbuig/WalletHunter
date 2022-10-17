@@ -66,20 +66,38 @@ Contact @TsarBuig on Telegram
 #### BUY/SELL amounts
 ```yaml
 WALLETHUNTER_MODE: "buy_and_autosell", 
-// Available values : 
+// WALLETHUNTER_MODE available values : 
 - buy_and_sell --> will copy all buy/sell Tx from wallet
 - buy_and_autosell --> will copy buy Tx but will sell automatically after xx% of profit. Target is defined by AUTOSELL_PROFIT parameter
 - buy_only --> will only copy buys
 
-BUY_AMOUNT: "10%", // you can use percentage here. Example : with "50%"", if tracked wallet buys 1 BNB, you will buy 0.5 BNB
-SELL_AMOUNT: "100%", // if you copy a SELL Tx, it will sell  xx%  of the amount of those tokens that you hold in your wallet. You can also enter "same_as_tx" to use same value than the wallet you hunt
+BUY_AMOUNT: "10%", 
+// BUY_AMOUNT available values : 
+- "xx%" --> Example : with '50%', if tracked wallet buys 1 BNB, you will buy 0.5 BNB
+- "same_as_tx" --> use same value than the wallet you hunt
+
+SELL_AMOUNT: "100%", 
+// SELL_AMOUNT available values : 
+- "xx%" --> it will sell  xx%  of the amount of those tokens that you hold in your wallet
+- "same_as_tx" --> use same value than the wallet you hunt
+- "same_strategy" --> will copy your hunted wallet's sell strategy : if hunted wallet sells 10% of his bag, you will sell 10% of your bag too
+
 AUTOSELL_PROFIT: "200%", // if you use 'buy_and_autosell' mode, bot will automatically sell token when price has reached buyprice * AUTOSELL_PROFIT
+
+// MULTIBUY
+AMOUNT_OF_BUYS: 1, // increment number if you want the bot to make multiple buys in the same block
 
 ```
 
 #### Wallets that you want to hunt
 ```yaml
 TRACKED_WALLET : ["0x57825dd07df69d2d3bc800356133562770e7f0a1", "0x842550340af19d6e1af4cc1083a25e9c83c26f05"],
+```
+
+#### Track all tokens or not ?
+```yaml
+ONLY_TRACK_SPECIFIC_TOKENS : false,
+TRACKED_TOKENS : ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0x42981d0bfbAf196529376EE702F2a9Eb9092fcB5"],
 ```
 
 #### BUY protections
@@ -95,9 +113,14 @@ MAXIMUM_BUY_AMOUNT_IN_BASE: 10, // bot won't buy if your Tx value is SUPERIOR to
 
 #### GAS  
 ```yaml
-Tx_GAS : 120% // you can use percentage here. Example : with "120%"", if tracked wallet uses GAS = 10, you will use GAS = 12
-GAS_BOOST : 10 // if you use txGas = BOOST
-GAS_LIMIT : 1000000
+Tx_GAS_FOR_BUY : '100%', // GAS used for BUY Tx
+Tx_GAS_FOR_SELL: '120%', // same as above but for SELL Tx
+// Tx_GAS_FOR_xxx available values : 
+- "xx%" --> example : with '120%', if tracked wallet uses GAS = 10, you will use GAS = 12
+- "same_as_tx" --> use same value than the wallet you hunt
+- "BOOST" --> bot will check Current Market GAS value, then apply a % of raise defined by GAS_BOOST parameter.
+
+GAS_BOOST: '40%', // check above
 GASPRIORITY_FOR_ETH_ONLY : 2 // for EIP1559 Tx
 ```
 

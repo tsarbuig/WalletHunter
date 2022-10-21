@@ -75,6 +75,7 @@ BUY_AMOUNT: "10%",
 // BUY_AMOUNT available values : 
 - "xx%" --> Example : with '50%', if tracked wallet buys 1 BNB, you will buy 0.5 BNB
 - "same_as_tx" --> use same value than the wallet you hunt
+- "(enter a fixed amount) --> if you want to buy 0.01 ETH for each trade for instance
 
 SELL_AMOUNT: "100%", 
 // SELL_AMOUNT available values : 
@@ -86,6 +87,10 @@ AUTOSELL_PROFIT: "200%", // if you use 'buy_and_autosell' mode, bot will automat
 
 // MULTIBUY
 AMOUNT_OF_BUYS: 1, // increment number if you want the bot to make multiple buys in the same block
+
+// Track all tokens or not ?
+ONLY_TRACK_SPECIFIC_TOKENS : false,
+TRACKED_TOKENS : ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0x42981d0bfbAf196529376EE702F2a9Eb9092fcB5"], --> if you want to track only specific tokens
 
 ```
 
@@ -107,8 +112,22 @@ BUYAFTER_XXX_SECONDS : 0,
 HONEYPOT_CHECK : false, 
 BUY_SEVERAL_TIME_SAME_TOKEN : true, // If "false", bot not buy anymore the token if you've already bought it before
 ONLY_1_BUY_PER_BLOCK : true, // If "true", bot won't make more than 1 Tx per block. Set it to "false" if you want to track super-fast wallets with more than 1 Tx per block 
-MINIMUM_BUY_AMOUNT_IN_BASE: 0.0000001, // bot won't buy if your Tx value is INFERIOR to this value (in ETH, BNB...)
-MAXIMUM_BUY_AMOUNT_IN_BASE: 10, // bot won't buy if your Tx value is SUPERIOR to this value (in ETH, BNB...)
+```
+
+#### MIN / MAX BUY
+```yaml
+MINIMUM_BUY_AMOUNT_IN_BASE: 0.001,
+IF_MINIMUM_BUY_IS_REACHED: "ignore", 
+// IF_MINIMUM_BUY_IS_REACHED available values : 
+- "buy" --> if MINIMUM_BUY_AMOUNT_IN_BASE is reached, bot will create an order with MINIMUM_BUY_AMOUNT_IN_BASE value
+- "ignore" --> if MINIMUM_BUY_AMOUNT_IN_BASE is reached, ignore the Tx
+
+
+MAXIMUM_BUY_AMOUNT_IN_BASE: 0.25,
+IF_MAXIMUM_BUY_IS_REACHED: "buy", 
+// IF_MAXIMUM_BUY_IS_REACHED available values : 
+- "buy" --> if MAXIMUM_BUY_AMOUNT_IN_BASE is reached, bot will create an order with MAXIMUM_BUY_AMOUNT_IN_BASE value
+- "ignore" --> if MAXIMUM_BUY_AMOUNT_IN_BASE is reached, ignore the Tx
 ```
 
 #### GAS  
@@ -127,14 +146,14 @@ GASPRIORITY_FOR_ETH_ONLY : 2 // for EIP1559 Tx
 #### When stop the bot
 ```yaml
 AMOUNT_OF_BUY_TX_BEFORE_THE_BOT_STOP : 2, // bot will stop automatically after this amount of BUY Tx made in a row
-STOP_IF_BALANCE_IS_LOWER_THAN : 0.02, // bot will stop automatically if balance goes under this amount (to avoid being scammed by honeypot)
+STOP_IF_BALANCE_IS_LOWER_THAN : 0.02, // bot will stop automatically if balance goes under this amount
 ```
 
 #### Antirug
 ```yaml
 ACTIVATE_ANTIRUG : true, // use it if the wallet you track does not have its own antirug protection
-LIQUIDITY_REMOVAL_PERCENTAGE : 0.0001, // Force sell all your tokens is liquidity removal > LIQUIDITY_REMOVAL_PERCENTAGE
-GAS_MULTIPLIER : 2.0, // in case of force sell after detecting a rug, multiply original Tx Gas by GAS_MULTIPLIER
+LIQUIDITY_REMOVAL_PERCENTAGE : 30, // Force sell all your tokens is liquidity removal > LIQUIDITY_REMOVAL_PERCENTAGE
+GAS_MULTIPLIER : 1.1, // in case of force sell after detecting a rug, multiply original Tx Gas by GAS_MULTIPLIER
 ```
 
 # Dedicated modes

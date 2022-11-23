@@ -63,6 +63,17 @@ Contact @TsarBuig on Telegram
 
 # Bot configuration
 
+#### Wallets that you want to hunt
+```yaml
+TRACKED_WALLET : ["0x57825dd07df69d2d3bc800356133562770e7f0a1", "0x842550340af19d6e1af4cc1083a25e9c83c26f05"],
+```
+
+#### Track all tokens or not ?
+```yaml
+ONLY_TRACK_SPECIFIC_TOKENS : false,
+TRACKED_TOKENS : ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0x42981d0bfbAf196529376EE702F2a9Eb9092fcB5"],
+```
+
 #### BUY/SELL amounts
 ```yaml
 WALLETHUNTER_MODE: "buy_and_autosell", 
@@ -83,26 +94,20 @@ SELL_AMOUNT: "100%",
 - "same_as_tx" --> use same value than the wallet you hunt
 - "same_strategy" --> will copy your hunted wallet's sell strategy : if hunted wallet sells 10% of his bag, you will sell 10% of your bag too
 
-AUTOSELL_PROFIT: "200%", // if you use 'buy_and_autosell' mode, bot will automatically sell token when price has reached buyprice * AUTOSELL_PROFIT
-
 // MULTIBUY
 AMOUNT_OF_BUYS: 1, // increment number if you want the bot to make multiple buys in the same block
-
-// Track all tokens or not ?
-ONLY_TRACK_SPECIFIC_TOKENS : false,
-TRACKED_TOKENS : ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0x42981d0bfbAf196529376EE702F2a9Eb9092fcB5"], --> if you want to track only specific tokens
-
 ```
 
-#### Wallets that you want to hunt
+#### AUTOSELL parameters (for 'buy_and_autosell' mode)
 ```yaml
-TRACKED_WALLET : ["0x57825dd07df69d2d3bc800356133562770e7f0a1", "0x842550340af19d6e1af4cc1083a25e9c83c26f05"],
-```
+AUTOSELL_STOPLOSS : "50%", // bot will automatically sell token when price has gone below buyprice * AUTOSELL_STOPLOSS
 
-#### Track all tokens or not ?
-```yaml
-ONLY_TRACK_SPECIFIC_TOKENS : false,
-TRACKED_TOKENS : ["0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82", "0x42981d0bfbAf196529376EE702F2a9Eb9092fcB5"],
+// 1st take profit target
+AUTOSELL_PROFIT_TARGET_1: "101%", // 1st take profit target price = initial buyprice * AUTOSELL_PROFIT_TARGET_1
+AUTOSELL_AMOUNT_TARGET_1: "50%", // example : enter '50%' to sell 50% of your tokens holdings when 1st Take Profit Price is reached
+// 2nd take profit target
+AUTOSELL_PROFIT_TARGET_2: "105%", // 2nd take profit target price = initial buyprice * AUTOSELL_PROFIT_TARGET_2
+AUTOSELL_AMOUNT_TARGET_2: "50%", // example : enter '30%' to sell 30% of your initial tokens holdings when 2nd Take Profit Price is reached
 ```
 
 #### BUY protections
@@ -111,6 +116,7 @@ TOKENS_BLACKLIST : ["0x702de1f526ac996bcfdb6512bafbe04bf619fad6", "0xe9e7cea3ded
 BUYAFTER_XXX_SECONDS : 0, 
 HONEYPOT_CHECK : false, 
 BUY_SEVERAL_TIME_SAME_TOKEN : true, // If "false", bot not buy anymore the token if you've already bought it before
+SELL_SEVERAL_TIME_SAME_TOKEN : true,
 ONLY_1_BUY_PER_BLOCK : true, // If "true", bot won't make more than 1 Tx per block. Set it to "false" if you want to track super-fast wallets with more than 1 Tx per block 
 ```
 
@@ -127,20 +133,28 @@ MAXIMUM_BUY_AMOUNT_IN_BASE: 0.25,
 IF_MAXIMUM_BUY_IS_REACHED: "buy", 
 // IF_MAXIMUM_BUY_IS_REACHED available values : 
 - "buy" --> if MAXIMUM_BUY_AMOUNT_IN_BASE is reached, bot will create an order with MAXIMUM_BUY_AMOUNT_IN_BASE value
+- "buy_degen" --> if MAXIMUM_BUY_AMOUNT_IN_BASE is reached, bot will try to buy same amount of tokens, but with ETH/BNB amount = MAXIMUM_BUY_AMOUNT_IN_BASE.
 - "ignore" --> if MAXIMUM_BUY_AMOUNT_IN_BASE is reached, ignore the Tx
 ```
 
 #### GAS  
 ```yaml
 Tx_GAS_FOR_BUY : '100%', // GAS used for BUY Tx
-Tx_GAS_FOR_SELL: '120%', // same as above but for SELL Tx
-// Tx_GAS_FOR_xxx available values : 
-- "xx%" --> example : with '120%', if tracked wallet uses GAS = 10, you will use GAS = 12
-- "same_as_tx" --> use same value than the wallet you hunt
-- "BOOST" --> bot will check Current Market GAS value, then apply a % of raise defined by GAS_BOOST parameter.
+Tx_GAS_FOR_SELL: '100%', // same as above but for SELL Tx
+/* Tx_GAS_FOR_xxx available values : 
+    - "xx%" --> example : with '120%', if tracked wallet uses GAS = 10, you will use GAS = 12
+    - "same_as_tx" --> use same value than the wallet you hunt
+    - "BOOST" --> bot will check Current Market GAS value, then apply a % of raise defined by GAS_BOOST parameter.
+    */
 
 GAS_BOOST: '40%', // check above
-GASPRIORITY_FOR_ETH_ONLY : 2 // for EIP1559 Tx
+MAX_GAS : 270, // WalletHunter will not make Tx if GAS > MAX_GAS
+MAX_PRIORITY_GAS : 50, // WalletHunter will not make Tx if PRIORITY GAS > MAX_PRIORITY
+
+MAX_GAS_FOR_ANTIRUG : 100, // if ANTIRUG is triggered : WalletHunter will not create Tx if GAS > MAX_GAS_FOR_ANTIRUG
+MAX_PRIORITY_GAS_FOR_ANTIRUG : 50, // if ANTIRUG is triggered : WalletHunter will not make Tx if PRIORITY GAS > MAX_PRIORITY_GAS_FOR_ANTIRUG
+
+MAX_GAS_FOR_AUTOSELL : 100, // if AUTOSELL is triggered : WalletHunter will not create Tx if GAS > MAX_GAS_FOR_AUTOSELL
 ```
 
 #### When stop the bot
@@ -149,7 +163,7 @@ AMOUNT_OF_BUY_TX_BEFORE_THE_BOT_STOP : 2, // bot will stop automatically after t
 STOP_IF_BALANCE_IS_LOWER_THAN : 0.02, // bot will stop automatically if balance goes under this amount
 ```
 
-#### Antirug
+#### ANTIRUG parameters
 ```yaml
 ACTIVATE_ANTIRUG : true, // use it if the wallet you track does not have its own antirug protection
 LIQUIDITY_REMOVAL_PERCENTAGE : 30, // Force sell all your tokens is liquidity removal > LIQUIDITY_REMOVAL_PERCENTAGE

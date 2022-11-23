@@ -12,6 +12,8 @@ WalletHunter is the only copytrading bot available on the market. Find profitabl
 
 and even better... you frontrun the original Tx :)
 
+WORLD FIRST : even the "Multicall" Tx from Uniswap are now decoded ! enjoy ;)
+
 &nbsp;
 
 # How does it works?
@@ -38,8 +40,6 @@ https://user-images.githubusercontent.com/70858574/186656960-d5b8152a-26d4-46e0-
 
 2/ As you may know, there are lots and lots of ways to make swaps, and I need to implement them into WalletHunter.
 Don't worry, all the usual ways are implemented, but when you find a wallet that you want to copy, send it to me (if it's ok for you) , and I'll tell you if WalletHunter is able to copy it
-
-3/ Only big limitation known today : UniswapV3 Tx are not clonable for now --> I'm working on it
 
 &nbsp;
 
